@@ -1,5 +1,4 @@
 package hw4_jasvant_dosanjh;
-//I know this is not how you wanted this assignment, but this is the way that i was able to get it to complete
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
