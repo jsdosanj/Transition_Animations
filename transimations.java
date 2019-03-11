@@ -1,4 +1,4 @@
-package hw4_jasvant_dosanjh;
+package transimations;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -10,7 +10,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class HW4_Jasvant_Dosanjh extends Application {
+public class transimations extends Application {
     private static final int      KEYBOARD_MOVEMENT_DELTA = 5;
     private static final Duration TRANSLATE_DURATION      = Duration.seconds(0.25);
     
@@ -39,11 +39,9 @@ public class HW4_Jasvant_Dosanjh extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
     public static void main(String[] args) {
         launch(args);
     }
-
     private void moveCircleOnKeyPress(Scene scene, final Circle circle) {
         //allow user to move cirlce through the arrow keys
         scene.setOnKeyPressed((KeyEvent event) -> {
@@ -63,7 +61,6 @@ public class HW4_Jasvant_Dosanjh extends Application {
             }
         });
     }
-
     private void moveCircle1OnKeyPress(Scene scene, final Circle circle1) {
         //allow user to move cirlce through the arrow keys
         scene.setOnKeyPressed((KeyEvent event) -> {
@@ -107,13 +104,6 @@ public class HW4_Jasvant_Dosanjh extends Application {
             transition.playFromStart();      
         });
     }
-    /*
-    https://medium.freecodecamp.org/learn-these-4-things-and-working-with-lambda-expressions-b0ab36e0fffc
-    Lambda expressions take advantage of parallel process capabilities of multi-core environments 
-    as seen with the support of pipeline operations on data in the Stream API. 
-    They are anonymous methods (methods without names) used to implement a method defined by a functional interface.
-    A functional interface is an interface that contains one and only one abstract method.
-    */
     private Circle createCircle() {
         //cirlce method
         final Circle circle = new Circle(200, 150, 50, Color.WHITE);
@@ -125,14 +115,12 @@ public class HW4_Jasvant_Dosanjh extends Application {
         circle1.setOpacity(0.6);
         return circle1; 
     }
-    
     private Label createInstructions() {
         //create instructions for the user, so they know what to do
         Label instructions = new Label("Use the arrow keys or the mouse(click) to move the circle throughout the window\n");
         instructions.setTextFill(Color.WHITE);
         return instructions;
     }
-    
     private TranslateTransition createTranslateTransition(final Circle circle) {
         //Tells the circle what to do with a TranslateTransition
         final TranslateTransition transition = new TranslateTransition(TRANSLATE_DURATION, circle);
