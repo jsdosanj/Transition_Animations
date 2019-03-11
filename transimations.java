@@ -99,7 +99,7 @@ public class Transimations extends Application {
     private TranslateTransition createTranslateTransition(final Circle circle) {
         //Tells the circle what to do with a TranslateTransition
         final TranslateTransition transition = new TranslateTransition(TRANSLATE_DURATION, circle);
-        transition.setOnFinished((ActionEvent t) -> {//again, netbeans suggested using a lambda expression.
+        transition.setOnFinished((ActionEvent t) -> {
             circle.setCenterX(circle.getTranslateX() + circle.getCenterX());
             circle.setCenterY(circle.getTranslateY() + circle.getCenterY());
             circle.setTranslateX(0);
@@ -111,7 +111,7 @@ public class Transimations extends Application {
     public TranslateTransition createTranslateTransition1(final Circle circle1) {
         //Tells the circle what to do with a TranslateTransition
         final TranslateTransition transition1 = new TranslateTransition(TRANSLATE_DURATION, circle1);
-        transition1.setOnFinished((ActionEvent t) -> {//again, netbeans suggested using a lambda expression.
+        transition1.setOnFinished((ActionEvent t) -> {
             circle1.setCenterX(circle1.getTranslateX() + circle1.getCenterX());
             circle1.setCenterY(circle1.getTranslateY() + circle1.getCenterY());
             circle1.setTranslateX(0);
