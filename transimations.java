@@ -1,4 +1,5 @@
 package transimations;
+
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -10,13 +11,12 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class transimations extends Application {
+public class Transimations extends Application {
     private static final int      KEYBOARD_MOVEMENT_DELTA = 5;
-    private static final Duration TRANSLATE_DURATION      = Duration.seconds(0.25);
+    private static final Duration TRANSLATE_DURATION      = Duration.seconds(0.10);
     
-    @Override
     public void start(Stage primaryStage) {
-        //create a circle object
+        //create 2 circle objects
         final Circle circle = createCircle();
         
         final Circle circle1 = createCircle();
@@ -27,21 +27,21 @@ public class transimations extends Application {
         final TranslateTransition transition = createTranslateTransition(circle);
         
         //create a scene that the shape will appear on
-        final Scene scene = new Scene(group, 600, 400, Color.BLACK);
+        final Scene scene = new Scene(group, 750, 500, Color.BLUE);
         
         //cirlce moves on key press
         moveCircleOnKeyPress(scene, circle);
-        moveCircleOnKeyPress(scene, circle1);
+
         //circle moves on mouse press
-        moveCircleOnMousePress(scene, circle, transition);
-        moveCircleOnMousePress(scene, circle1, transition);
-       
+        moveCircle1OnMousePress(scene, circle1, transition);
+        
         primaryStage.setScene(scene);
         primaryStage.show();
     }
     public static void main(String[] args) {
         launch(args);
     }
+    
     private void moveCircleOnKeyPress(Scene scene, final Circle circle) {
         //allow user to move cirlce through the arrow keys
         scene.setOnKeyPressed((KeyEvent event) -> {
@@ -61,42 +61,10 @@ public class transimations extends Application {
             }
         });
     }
-    private void moveCircle1OnKeyPress(Scene scene, final Circle circle1) {
-        //allow user to move cirlce through the arrow keys
-        scene.setOnKeyPressed((KeyEvent event) -> {
-            switch (event.getCode()) {
-                case UP:    
-                    circle1.setCenterY(circle1.getCenterY() - KEYBOARD_MOVEMENT_DELTA); 
-                break;
-                case RIGHT: 
-                    circle1.setCenterX(circle1.getCenterX() + KEYBOARD_MOVEMENT_DELTA); 
-                break;
-                case DOWN:  
-                    circle1.setCenterY(circle1.getCenterY() + KEYBOARD_MOVEMENT_DELTA); 
-                break;
-                case LEFT:  
-                    circle1.setCenterX(circle1.getCenterX() - KEYBOARD_MOVEMENT_DELTA); 
-                break;
-            }
-        });
-    }
-    private void moveCircleOnMousePress(Scene scene, final Circle circle, final TranslateTransition transition) {
-        //allow the user to move cirlce based on using a touchpad or mouse
-        scene.setOnMousePressed((MouseEvent event) -> {//netbeans suggested using a lambda expression. I'm not sure what it does it just added a -> into my code
-        //The arrow operator -> divides the lambda expression
-        //Left Side: Parameters required by Lambda expression -> Right Side: body which specifies the actions of the lambda expression.    
-            circle.setCenterX(event.getSceneX());
-            circle.setCenterY(event.getSceneY());
-            transition.setToX(event.getSceneX() - circle.getCenterX());
-            transition.setToY(event.getSceneY() - circle.getCenterY());
-            transition.playFromStart();      
-        });
-    }
+    
     private void moveCircle1OnMousePress(Scene scene, final Circle circle1, final TranslateTransition transition) {
         //allow the user to move cirlce based on using a touchpad or mouse
-        scene.setOnMousePressed((MouseEvent event) -> {//netbeans suggested using a lambda expression. I'm not sure what it does it just added a -> into my code
-        //The arrow operator -> divides the lambda expression
-        //Left Side: Parameters required by Lambda expression -> Right Side: body which specifies the actions of the lambda expression.    
+        scene.setOnMousePressed((MouseEvent event) -> {   
             circle1.setCenterX(event.getSceneX());
             circle1.setCenterY(event.getSceneY());
             transition.setToX(event.getSceneX() - circle1.getCenterX());
@@ -104,23 +72,30 @@ public class transimations extends Application {
             transition.playFromStart();      
         });
     }
+    
     private Circle createCircle() {
         //cirlce method
         final Circle circle = new Circle(200, 150, 50, Color.WHITE);
-        circle.setOpacity(0.7);
+        circle.setOpacity(0.8);
         return circle;
     }
+    
     private Circle createCircle1() {
-        final Circle circle1 = new Circle(250,200, 100, Color.GREEN);
-        circle1.setOpacity(0.6);
+        final Circle circle1 = new Circle(350,200, 100, Color.PURPLE);
+        circle1.setOpacity(0.8);
         return circle1; 
     }
+    
     private Label createInstructions() {
         //create instructions for the user, so they know what to do
-        Label instructions = new Label("Use the arrow keys or the mouse(click) to move the circle throughout the window\n");
-        instructions.setTextFill(Color.WHITE);
+        Label instructions = new Label("Welcome to Transimations.\n"
+                + "This is where you will experience two circles being moved throughout this window with your mouse or arrow keys\n"
+                + "Use the arrow keys to move 1 circle" 
+                + " and use the trackpad(click) to move the other circle throughout the window\n");
+        instructions.setTextFill(Color.YELLOW);
         return instructions;
     }
+    
     private TranslateTransition createTranslateTransition(final Circle circle) {
         //Tells the circle what to do with a TranslateTransition
         final TranslateTransition transition = new TranslateTransition(TRANSLATE_DURATION, circle);
@@ -132,6 +107,7 @@ public class transimations extends Application {
         });
     return transition;
     }
+    
     public TranslateTransition createTranslateTransition1(final Circle circle1) {
         //Tells the circle what to do with a TranslateTransition
         final TranslateTransition transition1 = new TranslateTransition(TRANSLATE_DURATION, circle1);
